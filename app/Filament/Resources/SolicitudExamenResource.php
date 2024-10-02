@@ -106,21 +106,23 @@ class SolicitudExamenResource extends Resource
                     ->label('Ver Detalle')
                     ->icon('heroicon-o-eye')
                     ->modalHeading('Detalles de la Solicitud')
-                    ->modalSubheading('Lista de exámenes solicitados')
-                    ->action(function (SolicitudExamen $record, Tables\Actions\Action $action) {
-                        // Acción que abrirá el modal (dejamos en blanco ya que la acción es solo mostrar)
+                    ->modalSubheading('Información completa de la solicitud')
+                    ->action(function (SolicitudExamen $record, Action $action) {
+                        // Pasar la solicitud al modal usando la acción
                     })
                     ->modalContent(function (SolicitudExamen $record) {
-                        // Mostrar los exámenes solicitados en el modal
+                        // Pasar la solicitud a la vista del modal
                         return view('filament.modals.detalle-solicitud', [
-                            'detalles' => $record->detalles // Los exámenes solicitados
+                            'solicitud' => $record // Pasamos la variable solicitud correctamente
                         ]);
                     })
-                    ->button(),
+                    ->button(),                
+
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()->label('Eliminar seleccionados'),
+                Tables\Actions\DeleteBulkAction::make()->label('Eliminar seleccionados'),
                 ]),
             ]);
     }

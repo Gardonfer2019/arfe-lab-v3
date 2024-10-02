@@ -14,6 +14,11 @@ class SolicitudExamen extends Model
 
     protected $fillable = ['paciente_id', 'usuario_id', 'fecha_solicitud', 'estado'];
 
+    // Especificar que fecha_solicitud es un atributo de tipo fecha
+    protected $casts = [
+        'fecha_solicitud' => 'datetime', // Esto asegurará que sea tratado como un objeto Carbon
+    ];
+
       // Relación con paciente
     public function paciente()
     {
@@ -65,5 +70,22 @@ class SolicitudExamen extends Model
             }
         });
     }
+
+    /*public function actualizarEstado()
+    {
+        // Verificar si todos los resultados están completos
+        $resultadosPendientes = $this->resultados()->whereNull('resultado')->count();
+
+        if ($resultadosPendientes == 0) {
+            // Si no hay resultados pendientes, actualizar el estado a 'Completada'
+            $this->estado = 'Completada';
+        } else {
+            // Si hay resultados pendientes, actualizar el estado a 'En proceso'
+            $this->estado = 'En proceso';
+        }
+
+        // Guardar el nuevo estado
+        $this->save();
+    }*/
 
 }
