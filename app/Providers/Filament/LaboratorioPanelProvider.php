@@ -66,6 +66,12 @@ class LaboratorioPanelProvider extends PanelProvider
                     ->items([
                         \App\Filament\Resources\SolicitudExamenResource::class,
                     ]),
+                // Configuración del sistema: Usuarios
+                NavigationGroup::make()
+                    ->label('Configuración del Sistema')
+                    ->items([
+                        \App\Filament\Resources\UserResource::class,
+                    ]),
             ])
             ->middleware([
                 EncryptCookies::class,
