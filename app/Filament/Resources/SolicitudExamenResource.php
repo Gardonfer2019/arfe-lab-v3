@@ -96,6 +96,13 @@ class SolicitudExamenResource extends Resource
                     ->date(),
                 TextColumn::make('estado')
                     ->label('Estado')
+                    ->badge() // Agrega el estilo de badge
+                    ->color(fn (string $state): string => match ($state) {
+                        'pendiente' => 'warning',   // Estado pendiente en amarillo
+                        'completado' => 'success',  // Estado completado en verde
+                        'cancelado' => 'danger',    // Estado cancelado en rojo
+                        default => 'secondary',     // Otros estados (si existen) en gris
+                    })
                     ->sortable(),
             ])
             ->filters([
