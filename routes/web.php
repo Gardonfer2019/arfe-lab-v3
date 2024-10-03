@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('solicitudes/{id}/imprimir', [SolicitudExamenController::class, 'imprimir'])->name('solicitud.imprimir');
+Route::get('/laboratorio/solicitudes/{id}/imprimir', [SolicitudExamenController::class, 'imprimir'])->name('solicitud.imprimir');
 

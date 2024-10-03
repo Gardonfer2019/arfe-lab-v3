@@ -11,15 +11,18 @@ class SolicitudExamenController extends Controller
     //
     public function imprimir($id)
     {
-        // Consulta SQL cruda para obtener los detalles de la solicitud de examen
+        // Consulta SQL cruda para obtener los detalles de la solicitud de examen con series
         $solicitud = DB::select("
             SELECT 
                 s.id as solicitud_id, 
                 concat(p.nombre, ' ', p.apellido) as nombre_paciente, 
+                EXTRACT(YEAR FROM AGE(p.fecha_nacimiento)) AS edad,
+                p.genero as sexo,
                 e.nombre_examen as nombre_examen, 
+                se.nombre as nombre_serie, -- Agregar el nombre de la serie
                 c.nombre_componente as nombre_componente, 
                 r.resultado as resultado, 
-                concat(c.valor_referencia_min, ' - ', c.valor_referencia_max, ' ', c.unidad)  as referencia, 
+                concat(c.valor_referencia_min, ' - ', c.valor_referencia_max, ' ', c.unidad) as referencia, 
                 s.fecha_solicitud,
                 r.fecha_examen
             FROM 
@@ -32,10 +35,12 @@ class SolicitudExamenController extends Controller
                 componentes_examen c ON r.componente_id = c.id
             INNER JOIN 
                 examenes e ON c.examen_id = e.id
+            LEFT JOIN 
+                series se ON se.id = c.serie_id -- Left join para series
             WHERE 
                 s.id = :id
             ORDER BY 
-                e.nombre_examen, c.nombre_componente
+                e.nombre_examen, se.nombre desc, c.nombre_componente
         ", ['id' => $id]);
 
         // Verificar si la solicitud tiene datos
@@ -44,7 +49,7 @@ class SolicitudExamenController extends Controller
             return redirect()->back()->withErrors('Solicitud no encontrada');
         }
 
-        // Retornar la vista con los datos de la solicitud
+    // Retornar la vista con los datos de la solicitud
         return view('solicitudes.imprimir', compact('solicitud'));
     }
 }

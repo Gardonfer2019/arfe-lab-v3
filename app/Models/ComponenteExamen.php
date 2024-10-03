@@ -14,6 +14,7 @@ class ComponenteExamen extends Model
 
     protected $fillable = [
         'examen_id',
+        'serie_id',
         'nombre_componente',
         'abreviatura',
         'unidad',
@@ -30,6 +31,6 @@ class ComponenteExamen extends Model
     // Relación con Serie
     public function serie()
     {
-        return $this->belongsTo(Serie::class);
+        return $this->belongsTo(Serie::class, 'serie_id');
     }
 }
