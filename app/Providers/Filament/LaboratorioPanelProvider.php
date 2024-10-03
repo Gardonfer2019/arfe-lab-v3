@@ -18,6 +18,8 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\NavigationGroup;
+use BezhanSalleh\FilamentShield\Resources\RoleResource;
+use BezhanSalleh\FilamentShield\Resources\PermissionResource;
 
 class LaboratorioPanelProvider extends PanelProvider
 {
@@ -72,6 +74,8 @@ class LaboratorioPanelProvider extends PanelProvider
                     ->label('Configuración del Sistema')
                     ->items([
                         \App\Filament\Resources\UserResource::class,
+                        RoleResource::class,  // Agrega el recurso de Roles
+                        PermissionResource::class, // Agrega el recurso de Permisos
                     ]),
             ])
             ->middleware([
@@ -87,6 +91,9 @@ class LaboratorioPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ]);
     }
 }

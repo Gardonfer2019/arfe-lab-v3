@@ -40,12 +40,17 @@ class UserResource extends Resource
                     ->label('Correo Electrónico')
                     ->email()
                     ->required(),
-                    Forms\Components\TextInput::make('password')
+                Forms\Components\TextInput::make('password')
                     ->label('Contraseña')
                     ->password()
                     ->dehydrateStateUsing(fn ($state) => $state ? bcrypt($state) : null)
                     ->required(fn (string $context) => $context === 'create') // Solo requerido en la creación
                     ->hiddenOn('edit'), // Oculto en la edición
+                Forms\Components\Select::make('roles')
+                    ->relationship('roles', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
             ]);
     }
 
