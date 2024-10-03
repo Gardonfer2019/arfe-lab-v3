@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use App\Models\Serie;
 
 use App\Models\Examen;
 
@@ -34,11 +35,16 @@ class ComponenteExamenResource extends Resource
         return $form
             ->schema([
                 //
-                Select::make('examen_id')
+            Select::make('examen_id')
                 ->label('Examen')
                 ->options(Examen::all()->pluck('nombre_examen', 'id'))
                 ->required()
                 ->searchable(),
+            Select::make('serie_id')
+                ->label('Serie')
+                ->options(Serie::all()->pluck('nombre', 'id'))
+                ->searchable()
+                ->required(),
             TextInput::make('nombre_componente')
                 ->label('Nombre del Componente')
                 ->required()
@@ -57,6 +63,7 @@ class ComponenteExamenResource extends Resource
                 ->label('Valor Referencia Máximo')
                 ->numeric()
                 ->step(0.01),
+            
             ]);
     }
 
