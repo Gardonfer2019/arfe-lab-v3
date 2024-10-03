@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('componente_id')->constrained('componentes_examen')->onDelete('cascade');
             $table->foreignId('solicitud_id')->constrained('solicitudes_examenes')->onDelete('cascade');
             $table->decimal('resultado', 10, 2); // Resultado numérico del examen
-            $table->date('fecha_resultado');
+            $table->date('fecha_examen');
             $table->timestamps();
             $table->softDeletes();
         });

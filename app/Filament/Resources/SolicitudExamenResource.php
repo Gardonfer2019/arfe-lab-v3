@@ -116,7 +116,14 @@ class SolicitudExamenResource extends Resource
                             'solicitud' => $record // Pasamos la variable solicitud correctamente
                         ]);
                     })
-                    ->button(),                
+                    ->button(),  
+                    Action::make('imprimir')
+                ->label('Imprimir')
+                ->icon('heroicon-o-printer')
+                ->action(function (SolicitudExamen $record) {
+                    return redirect()->route('solicitud.imprimir', $record->id);
+                })
+                ->openUrlInNewTab(), // Esto abrirá la vista en una nueva pestaña              
 
                 
             ])
