@@ -41,12 +41,16 @@ class ExamenResource extends Resource
                 Textarea::make('descripcion')
                     ->label('Descripción')
                     ->maxLength(500),
-                    TextInput::make('monto_default')
+                TextInput::make('monto_default')
                     ->label('Monto Predeterminado')
                     ->required()
                     ->numeric() // Se asegura de que el campo solo acepte números
                     ->minValue(0) // Valor mínimo de 0
                     ->step(0.01), // Define el paso para valores decimales
+                Select::make('series')
+                    ->multiple()
+                    ->relationship('series', 'nombre')
+                    ->searchable(),
             ]);
     }
 

@@ -30,4 +30,10 @@ class Examen extends Model
     {
         return $this->hasMany(DetalleSolicitudExamen::class);
     }
+
+    // Relación muchos a muchos con Series
+    public function series()
+    {
+        return $this->belongsToMany(Serie::class, 'examen_serie');
+    }
 }

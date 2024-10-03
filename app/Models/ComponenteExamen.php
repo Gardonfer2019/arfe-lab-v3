@@ -26,4 +26,10 @@ class ComponenteExamen extends Model
     {
         return $this->belongsTo(Examen::class, 'examen_id');
     }
+
+    // Relación con Serie
+    public function serie()
+    {
+        return $this->belongsTo(Serie::class);
+    }
 }

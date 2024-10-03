@@ -59,6 +59,7 @@ class LaboratorioPanelProvider extends PanelProvider
                         \App\Filament\Resources\ExamenResource::class,
                         \App\Filament\Resources\ComponentesExamenResource::class,
                         \App\Filament\Resources\ResultadoExamenResource::class,
+                        \App\Filament\Resources\SerieResource::class,
                     ]),
 
                 
