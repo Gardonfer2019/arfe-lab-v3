@@ -24,6 +24,9 @@ class ResultadoExamenResource extends Resource
 {
     protected static ?string $model = ResultadoExamen::class;
 
+    protected static ?string $navigationGroup = 'Solicitudes';
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     public static function form(Form $form): Form

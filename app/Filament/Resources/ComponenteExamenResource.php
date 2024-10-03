@@ -21,7 +21,8 @@ use App\Models\Examen;
 class ComponenteExamenResource extends Resource
 {
     protected static ?string $model = ComponenteExamen::class;
-
+    protected static ?string $navigationGroup = 'Gestión de Exámenes';
+    protected static ?int $navigationSort = 2;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
 
     protected static ?string $navigationLabel = 'Componentes de Exámenes';

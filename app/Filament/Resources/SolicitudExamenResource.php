@@ -30,6 +30,8 @@ class SolicitudExamenResource extends Resource
 {
     protected static ?string $model = SolicitudExamen::class;
 
+    protected static ?string $navigationGroup = 'Solicitudes';
+    protected static ?int $navigationSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
     protected static ?string $navigationLabel = 'Solicitudes de Exámenes';

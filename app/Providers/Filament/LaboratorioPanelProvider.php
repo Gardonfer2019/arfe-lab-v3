@@ -17,6 +17,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
 
 class LaboratorioPanelProvider extends PanelProvider
 {
@@ -39,6 +40,32 @@ class LaboratorioPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+            ])
+            ->navigationGroups([
+                // Segunda Sección: Pacientes
+                NavigationGroup::make()
+                    ->label('Gestión de Pacientes')
+                    ->items([
+                        \App\Filament\Resources\PacienteResource::class,
+                    ]),
+                
+                // Primera Sección: Gestión de Exámenes
+                NavigationGroup::make()
+                    ->label('Gestión de Exámenes')
+                    ->items([
+                        \App\Filament\Resources\ExamenResource::class,
+                        \App\Filament\Resources\ComponentesExamenResource::class,
+                        \App\Filament\Resources\ResultadoExamenResource::class,
+                    ]),
+
+                
+
+                // Tercera Sección: Solicitudes
+                NavigationGroup::make()
+                    ->label('Solicitudes')
+                    ->items([
+                        \App\Filament\Resources\SolicitudExamenResource::class,
+                    ]),
             ])
             ->middleware([
                 EncryptCookies::class,
