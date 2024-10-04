@@ -188,7 +188,7 @@
             @endphp
         @endif
 
-        @if($serieActual !== $resultado->nombre_serie)
+        @if(!empty($resultado->nombre_serie) && $serieActual !== $resultado->nombre_serie)
             @if($serieActual !== null)
                 </tbody>
                 </table>
@@ -197,7 +197,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Componente</th>
+                        <th>Componente/Examen</th>
                         <th>Resultado</th>
                         <th>Referencia</th>
                     </tr>
@@ -206,6 +206,23 @@
 
             @php
                 $serieActual = $resultado->nombre_serie;
+            @endphp
+        @elseif(empty($resultado->nombre_serie) && $serieActual !== 'sin-serie')
+            @if($serieActual !== null)
+                </tbody>
+                </table>
+            @endif
+            <table>
+                <thead>
+                    <tr>
+                        <th>Componente/Examen</th>
+                        <th>Resultado</th>
+                        <th>Referencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+            @php
+                $serieActual = 'sin-serie';
             @endphp
         @endif
 
