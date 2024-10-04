@@ -26,6 +26,8 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\HasManyRepeater;
 use Illuminate\Support\Facades\Auth;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
 
 class SolicitudExamenResource extends Resource
 {
@@ -35,10 +37,29 @@ class SolicitudExamenResource extends Resource
     protected static ?int $navigationSort = 1;
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
+    
+
+    
     protected static ?string $navigationLabel = 'Solicitudes de Exámenes';
     protected static ?string $pluralModelLabel = 'Solicitudes de Exámenes';
+    
+
+    // Método para mostrar el número de solicitudes pendientes
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) SolicitudExamen::where('estado', 'pendiente')->count();
+    }
+
+    // Método para cambiar el color del badge a 'warning'
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning'; // Cambiar el color a "warning" (amarillo)
+    }
+
+    
     protected static ?string $modelLabel = 'Solicitud de Examen';
 
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -126,6 +147,24 @@ class SolicitudExamenResource extends Resource
             ])
             ->filters([
                 //
+                SelectFilter::make('estado')
+                    ->label('Estado')
+                    ->options([
+                        'pendiente' => 'Pendiente',
+                        'completado' => 'Completado',
+                        'cancelado' => 'Cancelado',
+                    ]),
+                Filter::make('fecha_solicitud')
+                    ->label('Fecha de Solicitud')
+                    ->form([
+                        DatePicker::make('fecha_desde')->label('Desde'),
+                        DatePicker::make('fecha_hasta')->label('Hasta'),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        return $query
+                            ->when($data['fecha_desde'], fn ($query, $date) => $query->whereDate('fecha_solicitud', '>=', $date))
+                            ->when($data['fecha_hasta'], fn ($query, $date) => $query->whereDate('fecha_solicitud', '<=', $date));
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

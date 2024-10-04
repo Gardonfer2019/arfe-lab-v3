@@ -67,6 +67,9 @@ class UserResource extends Resource
                     ->label('Correo Electrónico')
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('roles.name')
+                    ->badge(),
+                    
             ])
             ->filters([
                 //
