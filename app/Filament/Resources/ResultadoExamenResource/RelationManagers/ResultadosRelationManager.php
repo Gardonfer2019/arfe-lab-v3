@@ -81,8 +81,8 @@ class ResultadosRelationManager extends RelationManager
                     ->searchable(),
                 TextInput::make('resultado')
                     ->label('Resultado')
-                    ->numeric()
-                    ->required(),
+                    ->required()
+                    ->maxLength(255), 
             ]);
     }
 }

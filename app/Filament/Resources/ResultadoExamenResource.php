@@ -34,7 +34,7 @@ class ResultadoExamenResource extends Resource
         return $form
             ->schema([
                 //
-                Select::make('paciente_id')
+            Select::make('paciente_id')
                 ->label('Paciente')
                 ->options(Paciente::all()->pluck('nombre', 'id'))
                 ->required()
@@ -50,8 +50,8 @@ class ResultadoExamenResource extends Resource
                 ->required(),
             TextInput::make('resultado')
                 ->label('Resultado')
-                ->numeric()
-                ->required(),
+                ->required()
+                ->maxLength(255), 
             DatePicker::make('fecha_examen')
                 ->label('Fecha del Resultado')
                 ->required(),

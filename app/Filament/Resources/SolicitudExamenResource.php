@@ -43,44 +43,51 @@ class SolicitudExamenResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('paciente_id')
-                    ->label('Paciente')
-                    ->options(Paciente::all()->pluck('nombre_completo', 'id'))
-                    ->required()
-                    ->searchable(),
-                DatePicker::make('fecha_solicitud')
-                    ->label('Fecha de Solicitud')
-                    ->required(),
-                Select::make('estado')
-                    ->label('Estado')
-                    ->options([
-                        'pendiente' => 'Pendiente',
-                        'completado' => 'Completado',
-                        'cancelado' => 'Cancelado',
-                    ])
-                    ->default('pendiente')
-                    ->required(),
-                // El campo 'usuario_id' se asigna automáticamente en el backend, no se muestra en el formulario
-                Hidden::make('usuario_id') // Campo oculto para el ID del usuario
-                    ->default(Auth::id()),
-                // HasManyRepeater para agregar exámenes a la solicitud
+                // Dividimos los primeros tres campos en tres columnas
+                Forms\Components\Grid::make(3)
+                    ->schema([
+                        Select::make('paciente_id')
+                            ->label('Paciente')
+                            ->options(Paciente::all()->pluck('nombre_completo', 'id'))
+                            ->required()
+                            ->searchable(),
+                        Select::make('estado')
+                            ->label('Estado')
+                            ->options([
+                                'pendiente' => 'Pendiente',
+                                'completado' => 'Completado',
+                                'cancelado' => 'Cancelado',
+                            ])
+                            ->default('pendiente')
+                            ->required(),
+                        DatePicker::make('fecha_solicitud')
+                            ->label('Fecha de Solicitud')
+                            ->required(),
+                    ]),
+
+                // Exámenes solicitados con observación por separado
                 HasManyRepeater::make('detalles')
-                ->relationship('detalles')
-                ->schema([
-                    Select::make('examen_id')
-                        ->label('Examen')
-                        ->options(Examen::all()->pluck('nombre_examen', 'id'))
-                        ->required()
-                        ->searchable(),
-                    Textarea::make('observacion')
-                        ->label('Observación')
-                        ->placeholder('Añadir una observación para este examen')
-                        ->rows(3)
-                        ->maxLength(500),
-                ])
-                ->label('Exámenes Solicitados')
-                ->minItems(1)
-                ->required(), // Puedes requerir al menos un examen
+                    ->relationship('detalles')
+                    ->schema([
+                        Forms\Components\Grid::make(1) // Esto asegura que cada examen ocupe toda la columna
+                            ->schema([
+                                Select::make('examen_id')
+                                    ->label('Examen')
+                                    ->options(Examen::all()->pluck('nombre_examen', 'id'))
+                                    ->required()
+                                    ->searchable()
+                                    ->columnSpan('full'), // Ocupa toda la columna
+                                Textarea::make('observacion')
+                                    ->label('Observación')
+                                    ->placeholder('Añadir una observación para este examen')
+                                    ->rows(3)
+                                    ->maxLength(500)
+                                    ->columnSpan('full'), // Ocupa toda la columna
+                            ]),
+                    ])
+                    ->label('Exámenes Solicitados')
+                    ->minItems(1)
+                    ->required(),// Puedes requerir al menos un examen
             ]);
     }
 
