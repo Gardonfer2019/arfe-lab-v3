@@ -96,10 +96,15 @@ class SolicitudExamenResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('paciente.nombre_completo') // Usamos el accesor para el nombre completo
-                ->label('Paciente')
-                ->sortable()
-                ->searchable(),
+                TextColumn::make('paciente.nombre') 
+                    ->label('Nombre')
+                    ->sortable()
+                    ->searchable(), // Esto permite buscar solo por 'nombre'
+
+                TextColumn::make('paciente.apellido') 
+                    ->label('Apellido')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('usuario.name')
                     ->label('Técnico/Encargado')
                     ->sortable()
