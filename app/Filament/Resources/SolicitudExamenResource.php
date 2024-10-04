@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\Examen;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TextArea;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Hidden;
@@ -64,16 +65,22 @@ class SolicitudExamenResource extends Resource
                     ->default(Auth::id()),
                 // HasManyRepeater para agregar exámenes a la solicitud
                 HasManyRepeater::make('detalles')
-                    ->relationship('detalles') // Define la relación 'detalles' con la tabla 'detalle_solicitudes_examenes'
-                    ->schema([
-                        Select::make('examen_id')
-                            ->label('Examen')
-                            ->options(Examen::all()->pluck('nombre_examen', 'id'))
-                            ->required()
-                            ->searchable(),
-                    ])
-                    ->label('Exámenes Solicitados')
-                    ->minItems(1), // Puedes requerir al menos un examen
+                ->relationship('detalles')
+                ->schema([
+                    Select::make('examen_id')
+                        ->label('Examen')
+                        ->options(Examen::all()->pluck('nombre_examen', 'id'))
+                        ->required()
+                        ->searchable(),
+                    Textarea::make('observacion')
+                        ->label('Observación')
+                        ->placeholder('Añadir una observación para este examen')
+                        ->rows(3)
+                        ->maxLength(500),
+                ])
+                ->label('Exámenes Solicitados')
+                ->minItems(1)
+                ->required(), // Puedes requerir al menos un examen
             ]);
     }
 

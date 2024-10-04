@@ -85,7 +85,7 @@
 
         h3 {
             background-color: #f1c40f; /* Amarillo del logo */
-            color: white;
+            color: rgb(44, 44, 44);
             padding: 10px;
             border-radius: 5px;
             font-weight: 500;
@@ -109,15 +109,14 @@
             margin-bottom: 10px;
         }
 
-        .observaciones {
-            margin-top: 20px;
+        .observacion {
+            margin-top: 10px;
             font-size: 14px;
             font-weight: 500;
             color: #2c3e50;
-            background-color: #ecf0f1;
+            background-color: #f8f9fa;
             padding: 10px;
             border-radius: 8px;
-            border: 2px solid #4b0082; /* Borde púrpura */
         }
 
         .firma {
@@ -130,6 +129,22 @@
         .firma .nombre-medico {
             font-weight: 700;
             margin-top: 5px;
+        }
+
+        /* Nueva sección de información del paciente en una sola fila */
+        .info-paciente {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+        }
+
+        .info-paciente div {
+            flex: 1;
+            text-align: center;
         }
 
         /* Ajustes para la impresión */
@@ -162,10 +177,14 @@
         <img src="{{ asset('images/Logo2 sin fondo.png') }}" alt="Logo del Laboratorio">
     </div>
     <h1>Resultados del Examen</h1>
-    <p><strong>Paciente:</strong> {{ $solicitud[0]->nombre_paciente }}</p>
-    <p><strong>Edad:</strong> {{ $solicitud[0]->edad }} años</p>
-    <p><strong>Sexo:</strong> {{ $solicitud[0]->sexo }}</p>
-    <p><strong>Fecha de Solicitud:</strong> {{ $solicitud[0]->fecha_solicitud }}</p>
+
+    <!-- Información del Paciente en una sola fila -->
+    <div class="info-paciente">
+        <div><strong>Paciente:</strong> {{ $solicitud[0]->nombre_paciente }}</div>
+        <div><strong>Edad:</strong> {{ $solicitud[0]->edad }} años</div>
+        <div><strong>Sexo:</strong> {{ $solicitud[0]->sexo }}</div>
+        <div><strong>Fecha de Solicitud:</strong> {{ $solicitud[0]->fecha_solicitud }}</div>
+    </div>
 </div>
 
 <div class="table-container">
@@ -179,6 +198,11 @@
             @if($examenActual !== null)
                 </tbody>
                 </table>
+                <!-- Mostrar observación para el examen anterior -->
+                <div class="observacion">
+                    <strong>Observación:</strong>
+                    <p>{{ $resultado->observacion }}</p>
+                </div>
             @endif
             <h3>{{ $resultado->nombre_examen }} <span style="font-size: 14px;">(Fecha Resultado: {{ $resultado->fecha_examen }})</span></h3>
 
@@ -236,15 +260,12 @@
     @if($examenActual !== null)
         </tbody>
         </table>
+        <!-- Mostrar observación para el último examen -->
+        <div class="observacion">
+            <strong>Observación:</strong>
+            <p>{{ $resultado->observacion }}</p>
+        </div>
     @endif
-</div>
-
-<div class="observaciones">
-    <strong>Observaciones:</strong>
-    <p></p>
-    <br>
-    <br>
-    <br>
 </div>
 
 <div class="firma">

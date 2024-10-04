@@ -12,7 +12,7 @@ class DetalleSolicitudExamen extends Model
 
     protected $table = 'detalle_solicitudes_examenes';
 
-    protected $fillable = ['solicitud_id', 'examen_id'];
+    protected $fillable = ['solicitud_id', 'examen_id',  'observacion',];
 
     // Relación con solicitud
     public function solicitud()

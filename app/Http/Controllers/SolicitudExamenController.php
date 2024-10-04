@@ -24,7 +24,8 @@ class SolicitudExamenController extends Controller
                 r.resultado as resultado, 
                 concat(c.valor_referencia_min, ' - ', c.valor_referencia_max, ' ', c.unidad) as referencia, 
                 s.fecha_solicitud,
-                r.fecha_examen
+                r.fecha_examen,
+                d.observacion
             FROM 
                 solicitudes_examenes s
             INNER JOIN 
@@ -37,10 +38,12 @@ class SolicitudExamenController extends Controller
                 examenes e ON c.examen_id = e.id
             LEFT JOIN 
                 series se ON se.id = c.serie_id -- Left join para series
+            LEFT JOIN 
+                detalle_solicitudes_examenes d ON d.solicitud_id = s.id AND d.examen_id = e.id
             WHERE 
                 s.id = :id
             ORDER BY 
-                e.nombre_examen, se.nombre desc, c.nombre_componente
+                e.nombre_examen, se.nombre desc, c.id asc
         ", ['id' => $id]);
 
         // Verificar si la solicitud tiene datos
