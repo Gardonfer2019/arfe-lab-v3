@@ -39,6 +39,10 @@ class PacienteResource extends Resource
                 TextInput::make('apellido')
                     ->required()
                     ->maxLength(100),
+                TextInput::make('identidad') // Nuevo campo
+                    ->label('Identidad')
+                    ->placeholder('0000-0000-00000'),
+                    //->required(),
                 DatePicker::make('fecha_nacimiento')
                     ->required(),
                 Select::make('genero')
@@ -55,6 +59,7 @@ class PacienteResource extends Resource
                 TextInput::make('email')
                     ->email()
                     ->maxLength(100),
+                
             ]);
     }
 
@@ -65,6 +70,7 @@ class PacienteResource extends Resource
                 //
                 TextColumn::make('nombre')->sortable()->searchable(),
                 TextColumn::make('apellido')->sortable()->searchable(),
+                TextColumn::make('identidad')->sortable(),
                 TextColumn::make('fecha_nacimiento')->sortable(),
                 TextColumn::make('genero')->sortable(),
                 TextColumn::make('telefono')->sortable(),
