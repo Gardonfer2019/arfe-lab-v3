@@ -1,0 +1,103 @@
+/* Tipografía global */
+body, h1, h2, h3, p {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Ajustes para la barra de navegación */
+.navbar {
+    font-size: 16px;
+    position: sticky; /* Hace que el navbar sea sticky */
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9); /* Color de fondo blanco con transparencia */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para el navbar */
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+/* Encabezado */
+header {
+    position: relative;
+    background-image: url("/images/portal.jpeg"); /* Ruta a tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    height: 80vh; /* Aumenta la altura del encabezado */
+    color: white;
+    display: flex;
+    justify-content: center;  /* Centra el contenido horizontalmente */
+    align-items: center;      /* Centra el contenido verticalmente */
+    text-align: center;       /* Asegura que el texto esté alineado al centro */
+}
+
+/* Oscurecer la imagen con un overlay */
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Capa oscura para que el texto sea legible */
+    z-index: 1;
+}
+
+/* Contenido del encabezado */
+header .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Texto y botones en el encabezado */
+header h1, header p, header a {
+    position: relative;
+    z-index: 2;
+}
+
+/* Colores personalizados para los botones */
+.btn-primary {
+    background-color: #F39C12; /* Color amarillo del logo */
+    border-color: #F39C12;
+}
+
+.btn-primary:hover {
+    background-color: #D68910;
+    border-color: #D68910;
+}
+
+/* Estilos de los servicios */
+.card {
+    border: none;
+}
+
+.card-title {
+    font-size: 1.25rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Estilos del formulario de contacto */
+form {
+    font-size: 1rem;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+/* Pie de página */
+footer {
+    background-color: #333;
+    font-size: 0.875rem;
+    color: white;
+}

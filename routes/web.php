@@ -15,7 +15,7 @@ use App\Http\Controllers\SolicitudExamenController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('portal');
 })->name('home');
 
 Route::get('/laboratorio/solicitudes/{id}/imprimir', [SolicitudExamenController::class, 'imprimir'])->name('solicitud.imprimir');
