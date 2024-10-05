@@ -10,7 +10,7 @@ class Paciente extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['nombre', 'apellido', 'fecha_nacimiento', 'genero', 'telefono', 'direccion', 'email'];
+    protected $fillable = ['nombre', 'apellido', 'fecha_nacimiento', 'genero', 'telefono', 'direccion', 'email', 'identidad'];
 
     public function resultadosExamen()
     {
