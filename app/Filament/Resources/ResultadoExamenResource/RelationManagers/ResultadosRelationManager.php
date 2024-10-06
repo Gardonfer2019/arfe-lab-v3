@@ -1,7 +1,6 @@
 <?php
 namespace App\Filament\Resources\SolicitudExamenResource\RelationManagers;
 
-namespace App\Filament\Resources\SolicitudExamenResource\RelationManagers;
 
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Forms;
