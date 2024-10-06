@@ -99,7 +99,7 @@ class SolicitudExamenResource extends Resource
                                     ->required()
                                     ->searchable()
                                     ->columnSpan('full'), // Ocupa toda la columna
-                                Textarea::make('observacion')
+                                TextArea::make('observacion')
                                     ->label('Observación')
                                     ->placeholder('Añadir una observación para este examen')
                                     ->rows(3)
