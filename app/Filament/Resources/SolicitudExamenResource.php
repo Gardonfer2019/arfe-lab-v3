@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Paciente;
 use App\Models\User;
 use App\Models\Examen;
+use App\Models\DetalleSolicitudExamen;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TextArea;
