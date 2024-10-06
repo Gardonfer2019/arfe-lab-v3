@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserSuperAdminSeeder extends Seeder
 {
@@ -14,18 +15,22 @@ class UserSuperAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        // Crear el rol de super_admin si no existe
+        // Crear el rol Super Admin si no existe
         $role = Role::firstOrCreate(['name' => 'super_admin']);
-        
-        // Crear el usuario
-        $user = User::create([
+
+        // Asignar todos los permisos al rol super_admin
+        $permissions = Permission::all(); // Obtén todos los permisos
+        $role->syncPermissions($permissions);
+
+        // Crear un usuario Super Admin
+        $user = User::firstOrCreate([
+            'email' => 'superadmin@arfe-lab.com',
+        ], [
             'name' => 'Super Admin',
-            'email' => 'superadmin@arfe.com', // Cambia el email por el que prefieras
-            'password' => bcrypt('password'),    // Cambia la contraseña
+            'password' => bcrypt('password123'), // Cambia a tu contraseña
         ]);
 
-        // Asignar el rol de super_admin al usuario
+        // Asignar el rol al usuario
         $user->assignRole($role);
     }
 }
