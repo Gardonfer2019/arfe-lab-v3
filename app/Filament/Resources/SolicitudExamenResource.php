@@ -20,7 +20,7 @@ use App\Models\Examen;
 use App\Models\DetalleSolicitudExamen;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Hidden;
@@ -99,7 +99,7 @@ class SolicitudExamenResource extends Resource
                                     ->required()
                                     ->searchable()
                                     ->columnSpan('full'), // Ocupa toda la columna
-                                TextArea::make('observacion')
+                                Textarea::make('observacion')
                                     ->label('Observación')
                                     ->placeholder('Añadir una observación para este examen')
                                     ->rows(3)
