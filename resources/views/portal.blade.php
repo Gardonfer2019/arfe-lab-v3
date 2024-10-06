@@ -12,6 +12,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Estilos Personalizados -->
     <link rel="stylesheet" href="{{ asset('css/portal/styles.css') }}">
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('images/microscope.png') }}" type="image/png">
+
 </head>
 <body>
 
