@@ -43,8 +43,7 @@ class ComponenteExamenResource extends Resource
             Select::make('serie_id')
                 ->label('Serie')
                 ->options(Serie::all()->pluck('nombre', 'id'))
-                ->searchable()
-                ->required(),
+                ->searchable(),
             TextInput::make('nombre_componente')
                 ->label('Nombre del Componente')
                 ->required()
